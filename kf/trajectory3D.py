@@ -18,14 +18,7 @@ class trajectory3D():
             [0, 0, 0, 0, 1, 0],
             [0, 0, 0, 0, 0, 1]
         ])
-        """
-        self.Q = self.q * np.array([[self.dt**3/3, 0      , self.dt**2/2, 0      ],
-                               [0,       self.dt**3/3, 0,       self.dt**2/2],
-                               [self.dt**2/2, 0,       self.dt,      0      ],
-                               [0,       self.dt**2/2, 0,       self.dt     ]])
-        """
         self.Q = self.q * np.diag([dt, dt, dt, dt, dt, dt])
-        
         self.H = np.array([
             [1, 0, 0, 0, 0, 0],
             [0, 1, 0, 0, 0, 0],
@@ -52,18 +45,3 @@ class trajectory3D():
             self.X[:,t] = x.flatten()
             self.Y[:,t] = y.flatten()
 #            print('-------')
-
-
-if __name__ == '__main__':
-    import matplotlib.pylab as plt
-    traj = trajectory(12345)
-    
-    plt.figure(1)
-    plt.plot(traj.Y[0,:], traj.Y[1,:], '+')
-    plt.plot(traj.X[0,:], traj.X[1,:])
-
-    plt.figure(2)
-    plt.subplot(1,2,1)
-    plt.plot(traj.X[2,:])    
-    plt.subplot(1,2,2)
-    plt.plot(traj.X[3,:])
